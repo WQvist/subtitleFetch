@@ -3,12 +3,12 @@ listOfAllEngSubtitles = []
 filmReq = input("Enter title: ")
 film = subscene.search(filmReq)
 
-# Hämta alla engelska subs
+# Fetch all english subtitles
 for subtitle in film.subtitles:
 	if subtitle.language == "English":
 		listOfAllEngSubtitles.append(subtitle)
 
-# Printa alla för att kunna välja
+# Print all to choose
 count = 1		
 for subtitle in listOfAllEngSubtitles:
 	print(count, subtitle.title)
