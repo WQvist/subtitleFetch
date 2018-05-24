@@ -8,12 +8,12 @@
 import subscene, requests, zipfile, io, sys
 
 # Fetch string between last \ and .
-stringToCheck = sys.argv[1]
-placeOfLastBackslash = stringToCheck.rfind("\\", 0, len(stringToCheck)-3)
-placeOfDot = stringToCheck.rfind(".")
+inputParameter = sys.argv[1]
+placeOfLastBackslash = inputParameter.rfind("\\")
+placeOfDot = inputParameter.rfind(".")
 
 # Find subtitles for title
-filmReq = stringToCheck[placeOfLastBackslash+1:placeOfDot]
+filmReq = inputParameter[placeOfLastBackslash+1:placeOfDot]
 listOfAllEngSubtitles = []
 film = subscene.search(filmReq)
 
@@ -26,4 +26,4 @@ r = requests.get(listOfAllEngSubtitles[0].zipped_url)
 z = zipfile.ZipFile(io.BytesIO(r.content))
 
 # Save in folder in which script was called from
-z.extractall(stringToCheck[:placeOfLastBackslash+1])
+z.extractall(inputParameter[:placeOfLastBackslash+1])
