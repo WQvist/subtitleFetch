@@ -29,7 +29,9 @@ z = zipfile.ZipFile(io.BytesIO(r.content))
 # Save in folder in which script was called from
 z.extractall(inputParameter[:placeOfLastBackslash+1])
 
-# Rename (This requires a single srt-file in directory)
-originalName = glob.glob('*.srt')[0]
-placeOfLastBackslash = originalName[0].rfind('\\')
-os.rename(originalName,originalName[:placeOfLastBackslash+1] + filmTitle + '.srt')
+# Rename if there's only one srt-file in directory
+srtFilesInDirectory = glob.glob('*.srt')
+if len(srtFilesInDirectory) == 1:
+	originalName = srtFilesInDirectory[0]
+	placeOfLastBackslash = originalName[0].rfind('\\')
+	os.rename(originalName,originalName[:placeOfLastBackslash+1] + filmTitle + '.srt')
